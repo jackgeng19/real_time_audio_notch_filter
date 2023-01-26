@@ -1,6 +1,7 @@
 import pyaudio
 import numpy as np
 from scipy.signal import iirnotch, lfilter
+import keyboard
 
 # Define the parameters of the filter
 sample_rate: int = 44100 #Hz
@@ -16,6 +17,9 @@ stream = p.open(format = pyaudio.paFloat32, channels = 1, rate = sample_rate, in
 
 # Loop to apply the filter to the audio data in real-time
 while True:
+    if keyboard.is_pressed('q'):  # if the 'q' key is pressed
+        break  # break out of the loop
+    # Read audio data from the input stream
     # Read audio data from the input stream
     data = stream.read(1024)
     # Converts data to be readable by lfilter
