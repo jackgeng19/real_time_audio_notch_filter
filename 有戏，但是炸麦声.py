@@ -4,7 +4,7 @@ from scipy.signal import iirnotch, lfilter
 import keyboard
 
 # Define the parameters of the filter
-sample_rate: int = 44100 #Hz
+sample_rate: int = 4800 #Hz
 quality: int = 35
 f_notch: int = 1000 #Hz
 
