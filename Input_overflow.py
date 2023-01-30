@@ -23,12 +23,12 @@ if device_index is None:
     raise ValueError("Device not found")
 
 # Design the notch filter
-b, a = iirnotch(freq, q, 44100)
+b, a = iirnotch(freq, q, 4800)
 
 # Open the audio input and output devices using PyAudio
 stream = p.open(format=pyaudio.paFloat32,
                 channels=1,
-                rate=44100,
+                rate=4800,
                 input=True,
                 output=True,
                 output_device_index=device_index,
