@@ -7,9 +7,9 @@ p = pyaudio.PyAudio()
 # Open a stream to capture audio from the microphone
 stream_in = p.open(format=pyaudio.paInt16,
                    channels=1,
-                   rate=44100,
+                   rate=48000,
                    input=True,
-                   input_device_index=2,
+                   input_device_index=3,
                    frames_per_buffer=1024)
 
 # Open another stream to play the enhanced audio
