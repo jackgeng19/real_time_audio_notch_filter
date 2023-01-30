@@ -17,7 +17,7 @@ stream = p.open(format = pyaudio.paFloat32, channels = 1, rate = sample_rate, in
 
 # Loop to apply the filter to the audio data in real-time
 while True:
-    if keyboard.is_pressed('space'):  # if the 'q' key is pressed
+    if keyboard.is_pressed('space'):  # if the space is pressed
         break  # break out of the loop
     # Read audio data from the input stream
     data = stream.read(1024)
