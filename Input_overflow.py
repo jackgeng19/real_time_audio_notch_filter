@@ -4,10 +4,10 @@ from scipy.signal import iirnotch, lfilter
 
 # Define the desired notch filter parameters
 freq = 440  # The frequency to notch out
-q = 30  # The Q-factor of the filter
+q = 5  # The Q-factor of the filter
 
-# Get device information
 p = pyaudio.PyAudio()
+
 info = p.get_host_api_info_by_index(0)
 numdevices = info.get('deviceCount')
 
@@ -26,7 +26,7 @@ if device_index is None:
 b, a = iirnotch(freq, q, 4800)
 
 # Open the audio input and output devices using PyAudio
-stream = p.open(format=pyaudio.paFloat32,
+stream = p.open(format=pyaudio.paInt16,
                 channels=1,
                 rate=4800,
                 input=True,
