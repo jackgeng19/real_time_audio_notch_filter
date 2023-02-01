@@ -32,7 +32,7 @@ stream = p.open(format=pyaudio.paInt16,
                 input=True,
                 output=True,
                 output_device_index=device_index,
-                frames_per_buffer=24000)
+                frames_per_buffer=4800)
 
 stop_flag = False
 while not stop_flag:
