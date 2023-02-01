@@ -6,6 +6,9 @@ from scipy.signal import iirnotch, lfilter
 freq = 4400  # The frequency to notch out
 q = 5  # The Q-factor of the filter
 
+
+# Test for diff value for freqs
+
 p = pyaudio.PyAudio()
 
 info = p.get_host_api_info_by_index(0)
