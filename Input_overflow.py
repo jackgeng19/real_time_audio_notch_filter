@@ -32,12 +32,12 @@ stream = p.open(format=pyaudio.paInt16,
                 input=True,
                 output=True,
                 output_device_index=device_index,
-                frames_per_buffer=4800)
+                frames_per_buffer=24000)
 
 stop_flag = False
 while not stop_flag:
     # Read a chunk of audio data from the input stream
-    data = stream.read(4800)
+    data = stream.read(4800, exception_on_overflow = False)
     audio_data = np.frombuffer(data, dtype=np.int16)
     # Apply the notch filter to the audio data
     filtered_audio = lfilter(b, a, audio_data)
