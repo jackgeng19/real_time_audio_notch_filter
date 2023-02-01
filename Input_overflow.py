@@ -3,7 +3,7 @@ import numpy as np
 from scipy.signal import iirnotch, lfilter
 
 # Define the desired notch filter parameters
-freq = 440  # The frequency to notch out
+freq = 4400  # The frequency to notch out
 q = 5  # The Q-factor of the filter
 
 p = pyaudio.PyAudio()
@@ -32,7 +32,7 @@ stream = p.open(format=pyaudio.paInt16,
                 input=True,
                 output=True,
                 output_device_index=device_index,
-                frames_per_buffer=9600)
+                frames_per_buffer=4800)
 
 stop_flag = False
 while not stop_flag:
