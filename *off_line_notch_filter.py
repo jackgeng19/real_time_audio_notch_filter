@@ -26,18 +26,21 @@ def apply_filter():
     b, a = scipy.signal.iirnotch(center_frequency, bandwidth, sr)
 
     # Apply the filter to the audio that is transferred
-    i = 1
-    m = center_frequency
-    filtered_data = scipy.signal.lfilter(b, a, data)
-    while i < 62:
-        b, a = scipy.signal.iirnotch(m, bandwidth, sr)
-        filtered_data = scipy.signal.lfilter(b, a, filtered_data)
-        m -= 1
-        i += 1
+    # # Trial version
+    # i = 1
+    # m = center_frequency
+    # filtered_data = scipy.signal.lfilter(b, a, data)
+    # while i < 62:
+    #     b, a = scipy.signal.iirnotch(m, bandwidth, sr)
+    #     filtered_data = scipy.signal.lfilter(b, a, filtered_data)
+    #     m -= 1
+    #     i += 1
 
-    # Write the filtered wav to a new file
+    filtered_data = scipy.signal.lfilter(b, a, data)
+
+    # Write the filtered wav to a new file (substitute the previous one if exists)
     sf.write('filtered_file.wav', filtered_data, sr)
-    label_result.config(text='File filtered successfully')
+    label_result.config(text='File filtered successfully!')
 
 # Use tkinter to create the main window
 root = tk.Tk()

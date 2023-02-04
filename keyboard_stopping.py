@@ -4,7 +4,7 @@ from scipy.signal import iirnotch, lfilter
 import keyboard
 
 # Define the parameters of the filter
-sample_rate: int = 4800 #Hz
+sample_rate: int = 44100 #Hz
 quality: int = 35
 f_notch: int = 1000 #Hz
 
@@ -13,7 +13,12 @@ b, a = iirnotch(f_notch, quality, sample_rate)
 
 # Open an input and output stream using PyAudio
 p = pyaudio.PyAudio()
-stream = p.open(format = pyaudio.paFloat32, channels = 1, rate = sample_rate, input = True, output = True, frames_per_buffer = 1024)
+stream = p.open(format = pyaudio.paFloat32, 
+                channels = 1, 
+                rate = sample_rate, 
+                input = True, 
+                output = True, 
+                frames_per_buffer = 1024)
 
 # Loop to apply the filter to the audio data in real-time
 while True:
