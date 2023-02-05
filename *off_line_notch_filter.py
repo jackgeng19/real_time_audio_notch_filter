@@ -22,7 +22,7 @@ def apply_filter():
     bandwidth = bandwidth
 
     # Create the notch filter we want
-    # Question remain: what is the difference between iirnotch and notch in scipy.signal
+    # Question: what is the difference between iirnotch and flrnotch in scipy.signal
     b, a = scipy.signal.iirnotch(center_frequency, bandwidth, sr)
 
     # Apply the filter to the audio that is transferred
