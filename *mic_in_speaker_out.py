@@ -74,6 +74,7 @@ class MicrophoneStream(object):
             yield b"".join(data)
 
 
+def output_audio_data(freq, quality, audio_data_generator):
     """Outputs the audio data from the generator through the speaker."""
     audio_interface = pyaudio.PyAudio()
     stream = audio_interface.open(
