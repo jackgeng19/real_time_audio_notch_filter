@@ -86,9 +86,10 @@ def output_audio_data(freq, quality, audio_data_generator):
         frames_per_buffer=CHUNK,
     )
     for audio_data in audio_data_generator:
-        audio_data = np.frombuffer(audio_data, dtype = np.uint32) #convert to one-dimension array
-        b, a = scipy.signal.iirnotch(freq, quality, RATE) 
-        audio_data = scipy.signal.lfilter(b, a, audio_data)
+        ## Uncomment this to apply the filter
+        # audio_data = np.frombuffer(audio_data, dtype = np.uint32) #convert to one-dimension array
+        # b, a = scipy.signal.iirnotch(freq, quality, RATE) 
+        # audio_data = scipy.signal.lfilter(b, a, audio_data)
         stream.write(audio_data)
     stream.stop_stream()
     stream.close()
