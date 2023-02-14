@@ -1,5 +1,6 @@
 from __future__ import division
 import pyaudio
+import scipy.signal
 from six.moves import queue
 
 # Inspired by STT model from Google Cloud service
@@ -73,7 +74,6 @@ class MicrophoneStream(object):
             yield b"".join(data)
 
 
-def output_audio_data(audio_data_generator):
     """Outputs the audio data from the generator through the speaker."""
     audio_interface = pyaudio.PyAudio()
     stream = audio_interface.open(
@@ -84,6 +84,8 @@ def output_audio_data(audio_data_generator):
         frames_per_buffer=CHUNK,
     )
     for audio_data in audio_data_generator:
+        b, a = scipy.signal.iirnotch(freq, quality, RATE)
+        audio_data = scipy.signal.lfilter(b, a, audio_data)
         stream.write(audio_data)
     stream.stop_stream()
     stream.close()
@@ -93,7 +95,7 @@ def output_audio_data(audio_data_generator):
 def main():
     with MicrophoneStream(RATE, CHUNK) as stream:
         audio_generator = stream.generator()
-        output_audio_data(audio_generator)
+        output_audio_data(440, 100, audio_generator)
 
 if __name__ == "__main__":
     main()

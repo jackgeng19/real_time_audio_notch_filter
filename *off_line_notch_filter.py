@@ -12,35 +12,35 @@ def apply_filter():
 
     # Ask the user to get center frequency and bandwidth
     center_frequency = float(center_frequency_entry.get())
-    bandwidth = float(bandwidth_entry.get())
+    quality = float(bandwidth_entry.get())
 
     # Read the audio file
     data, sr = sf.read(file_path)
 
     # Define the notch filter parameters in Hz
     center_frequency = center_frequency 
-    bandwidth = bandwidth
+    quality = quality
 
     # Create the notch filter we want
     # Question: what is the difference between iirnotch and flrnotch in scipy.signal
-    b, a = scipy.signal.iirnotch(center_frequency, bandwidth, sr)
+    b, a = scipy.signal.iirnotch(center_frequency, quality, sr)
 
     # Apply the filter to the audio that is transferred
-    # # Trial version
-    # i = 1
-    # m = center_frequency
-    # filtered_data = scipy.signal.lfilter(b, a, data)
-    # while i < 62:
-    #     b, a = scipy.signal.iirnotch(m, bandwidth, sr)
-    #     filtered_data = scipy.signal.lfilter(b, a, filtered_data)
-    #     m -= 1
-    #     i += 1
-
+    # Trial version
+    i = 1
+    m = center_frequency
     filtered_data = scipy.signal.lfilter(b, a, data)
+    while i < 62:
+        b, a = scipy.signal.iirnotch(m, quality, sr)
+        filtered_data = scipy.signal.lfilter(b, a, filtered_data)
+        m -= 1
+        i += 1
+
+    # filtered_data = scipy.signal.lfilter(b, a, data)
 
     # Write the filtered wav to a new file (substitute the previous one if exists)
     sf.write('filtered_file.wav', filtered_data, sr)
-    label_result.config(text='File filtered successfully!')
+    label_result.config(text = 'File filtered successfully!')
 
 # Use tkinter to create the main window
 root = tk.Tk()
@@ -52,7 +52,7 @@ center_frequency_label.pack()
 center_frequency_entry = tk.Entry(root)
 center_frequency_entry.pack()
 
-bandwidth_label = tk.Label(root, text="Bandwidth (Hz)")
+bandwidth_label = tk.Label(root, text="Quality")
 bandwidth_label.pack()
 bandwidth_entry = tk.Entry(root)
 bandwidth_entry.pack()
