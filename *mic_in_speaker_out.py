@@ -23,6 +23,7 @@ class MicrophoneStream(object):
         self.closed = True
 
     def __enter__(self):
+        # Implement Python Audio Stream Interaface
         self._audio_interface = pyaudio.PyAudio()
         self._audio_stream = self._audio_interface.open(
             format=pyaudio.paInt16,
